@@ -1,0 +1,2713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>StockWise — Inventory Intelligence</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="/style.css">
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                <span>SW</span>
+            </div>
+
+            <div class="brand-content">
+                <h2>StockWise</h2>
+                <span>Inventory Intelligence</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-navigation">
+
+            <div class="nav-group">
+
+                <div class="nav-label">
+                    MAIN
+                </div>
+
+                <button class="nav-item active"
+                        onclick="showPage('dashboard', this)">
+
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+
+                </button>
+
+
+                <button class="nav-item"
+                        onclick="showPage('inventory', this)">
+
+                    <span class="nav-icon">▣</span>
+                    <span>Inventory</span>
+
+                </button>
+
+
+                <button class="nav-item"
+                        onclick="showPage('analytics', this)">
+
+                    <span class="nav-icon">▥</span>
+                    <span>Analytics</span>
+
+                </button>
+
+            </div>
+
+
+            <div class="nav-group">
+
+                <div class="nav-label">
+                    INTELLIGENCE
+                </div>
+
+                <button class="nav-item"
+                        onclick="showPage('recommendations', this)">
+
+                    <span class="nav-icon">◇</span>
+                    <span>Recommendations</span>
+
+                </button>
+
+
+                <button class="nav-item"
+                        onclick="showPage('forecasting', this)">
+
+                    <span class="nav-icon">⌁</span>
+                    <span>Forecasting</span>
+
+                </button>
+
+            </div>
+
+
+            <div class="nav-group">
+
+                <div class="nav-label">
+                    REPORTING
+                </div>
+
+                <button class="nav-item"
+                        onclick="showPage('reports', this)">
+
+                    <span class="nav-icon">▤</span>
+                    <span>Reports</span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <span>All services operational</span>
+                </div>
+
+            </div>
+
+
+            <div class="sidebar-user">
+
+                <div class="user-avatar">
+                    AT
+                </div>
+
+                <div class="user-information">
+
+                    <strong>StockWise User</strong>
+                    <span>Administrator</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div class="breadcrumb-area">
+
+                <span class="breadcrumb-root">
+                    StockWise
+                </span>
+
+                <span class="breadcrumb-separator">
+                    /
+                </span>
+
+                <span id="breadcrumb">
+                    Dashboard
+                </span>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <div class="header-search">
+
+                    <span>⌕</span>
+
+                    <input id="globalSearch"
+                           type="text"
+                           placeholder="Search inventory...">
+
+                </div>
+
+
+                <button class="header-icon-button"
+                        onclick="toggleTheme()"
+                        title="Toggle theme">
+
+                    ◐
+
+                </button>
+
+
+                <button class="header-icon-button"
+                        title="Notifications">
+
+                    ♢
+
+                </button>
+
+
+                <div class="header-profile">
+
+                    <div class="header-avatar">
+                        AT
+                    </div>
+
+                    <div class="header-profile-info">
+
+                        <strong>Anushka</strong>
+                        <span>Administrator</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             CONTENT
+             ===================================================== -->
+
+        <div class="content-wrapper">
+
+
+            <!-- =================================================
+                 DASHBOARD
+                 ================================================= -->
+
+            <section id="dashboard"
+                     class="page-section active-page">
+
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            OVERVIEW
+                        </span>
+
+                        <h1>
+                            Inventory Dashboard
+                        </h1>
+
+                        <p>
+                            Monitor inventory levels, stock value and overall performance.
+                        </p>
+
+                    </div>
+
+                    <button class="primary-button"
+                            onclick="showPage('inventory')">
+
+                        + Add Inventory
+
+                    </button>
+
+                </div>
+
+
+                <!-- KPI CARDS -->
+
+                <div class="kpi-grid">
+
+
+                    <div class="kpi-card">
+
+                        <div class="kpi-header">
+
+                            <span class="kpi-label">
+                                Total Products
+                            </span>
+
+                            <span class="kpi-icon blue">
+                                ▣
+                            </span>
+
+                        </div>
+
+                        <strong class="kpi-value">
+                            {{TOTAL_PRODUCTS}}
+                        </strong>
+
+                        <span class="kpi-meta">
+                            Active products
+                        </span>
+
+                    </div>
+
+
+                    <div class="kpi-card">
+
+                        <div class="kpi-header">
+
+                            <span class="kpi-label">
+                                Categories
+                            </span>
+
+                            <span class="kpi-icon purple">
+                                ▦
+                            </span>
+
+                        </div>
+
+                        <strong class="kpi-value">
+                            {{TOTAL_CATEGORIES}}
+                        </strong>
+
+                        <span class="kpi-meta">
+                            Product categories
+                        </span>
+
+                    </div>
+
+
+                    <div class="kpi-card">
+
+                        <div class="kpi-header">
+
+                            <span class="kpi-label">
+                                Available Stock
+                            </span>
+
+                            <span class="kpi-icon green">
+                                ◈
+                            </span>
+
+                        </div>
+
+                        <strong class="kpi-value">
+                            {{AVAILABLE_STOCK}}
+                        </strong>
+
+                        <span class="kpi-meta">
+                            Units in inventory
+                        </span>
+
+                    </div>
+
+
+                    <div class="kpi-card">
+
+                        <div class="kpi-header">
+
+                            <span class="kpi-label">
+                                Inventory Value
+                            </span>
+
+                            <span class="kpi-icon amber">
+                                ₹
+                            </span>
+
+                        </div>
+
+                        <strong class="kpi-value">
+                            {{INVENTORY_VALUE}}
+                        </strong>
+
+                        <span class="kpi-meta">
+                            Inventory valuation
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECONDARY CARDS -->
+
+                <div class="secondary-kpi-grid">
+
+
+                    <div class="mini-card">
+
+                        <div>
+                            <span class="mini-label">
+                                Low Stock
+                            </span>
+
+                            <strong>
+                                {{LOW_STOCK}}
+                            </strong>
+                        </div>
+
+                        <span class="badge warning">
+                            Attention
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-card">
+
+                        <div>
+                            <span class="mini-label">
+                                Out of Stock
+                            </span>
+
+                            <strong>
+                                {{OUT_OF_STOCK}}
+                            </strong>
+                        </div>
+
+                        <span class="badge danger">
+                            Critical
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-card">
+
+                        <div>
+                            <span class="mini-label">
+                                Overstocked
+                            </span>
+
+                            <strong>
+                                {{OVERSTOCKED}}
+                            </strong>
+                        </div>
+
+                        <span class="badge neutral">
+                            Monitor
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-card">
+
+                        <div>
+                            <span class="mini-label">
+                                Forecast Demand
+                            </span>
+
+                            <strong>
+                                {{FORECAST_DEMAND}}
+                            </strong>
+                        </div>
+
+                        <span class="badge success">
+                            {{FORECAST_PERIOD}}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DASHBOARD CHARTS -->
+
+                <div class="dashboard-grid">
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Demand Overview
+                                </h3>
+
+                                <p>
+                                    Monthly demand and sales
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-container">
+
+                            <div id="demandChartDashboard"
+                                 class="plotly-chart">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Stock Status
+                                </h3>
+
+                                <p>
+                                    Current inventory health
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="stock-status">
+
+                            <div class="stock-status-row">
+
+                                <div>
+                                    <span class="status-circle healthy-circle"></span>
+                                    Healthy Stock
+                                </div>
+
+                                <strong>
+                                    {{HEALTHY_STOCK}}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="stock-status-row">
+
+                                <div>
+                                    <span class="status-circle warning-circle"></span>
+                                    Low Stock
+                                </div>
+
+                                <strong>
+                                    {{LOW_STOCK}}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="stock-status-row">
+
+                                <div>
+                                    <span class="status-circle danger-circle"></span>
+                                    Out of Stock
+                                </div>
+
+                                <strong>
+                                    {{OUT_OF_STOCK}}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="stock-status-row">
+
+                                <div>
+                                    <span class="status-circle neutral-circle"></span>
+                                    Overstocked
+                                </div>
+
+                                <strong>
+                                    {{OVERSTOCKED}}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PERFORMANCE -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Inventory Performance
+                            </h3>
+
+                            <p>
+                                Key products and categories
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-grid">
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Top Selling Product
+                            </span>
+
+                            <strong>
+                                {{TOP_PRODUCT}}
+                            </strong>
+
+                            <small>
+                                {{TOP_PRODUCT_SALES}} units sold
+                            </small>
+
+                        </div>
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Top Category
+                            </span>
+
+                            <strong>
+                                {{TOP_CATEGORY}}
+                            </strong>
+
+                            <small>
+                                {{TOP_CATEGORY_SALES}} units sold
+                            </small>
+
+                        </div>
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Fast Moving
+                            </span>
+
+                            <strong>
+                                {{FAST_MOVING}}
+                            </strong>
+
+                            <small>
+                                Products
+                            </small>
+
+                        </div>
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Slow Moving
+                            </span>
+
+                            <strong>
+                                {{SLOW_MOVING}}
+                            </strong>
+
+                            <small>
+                                Products
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 INVENTORY
+                 ================================================= -->
+
+            <section id="inventory"
+                     class="page-section">
+
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            INVENTORY
+                        </span>
+
+                        <h1>
+                            Inventory Management
+                        </h1>
+
+                        <p>
+                            Search, filter and monitor inventory records.
+                        </p>
+
+                    </div>
+
+
+                    <button class="primary-button"
+                            onclick="exportData()">
+
+                        Export Data
+
+                    </button>
+
+                </div>
+
+
+                <div class="filter-panel">
+
+                    <div class="search-field">
+
+                        <span>⌕</span>
+
+                        <input id="inventorySearch"
+                               type="text"
+                               placeholder="Search product...">
+
+                    </div>
+
+
+                    <select id="categoryFilter">
+
+                        <option value="">
+                            All Categories
+                        </option>
+
+                        <option value="Groceries">
+                            Groceries
+                        </option>
+
+                        <option value="Clothing">
+                            Clothing
+                        </option>
+
+                        <option value="Furniture">
+                            Furniture
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Toys">
+                            Toys
+                        </option>
+
+                    </select>
+
+
+                    <select id="statusFilter">
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="Healthy Stock">
+                            Healthy Stock
+                        </option>
+
+                        <option value="Low Stock">
+                            Low Stock
+                        </option>
+
+                        <option value="Out of Stock">
+                            Out of Stock
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Inventory Records
+                            </h3>
+
+                            <p>
+                                Current inventory dataset
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Product ID
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Inventory
+                                    </th>
+
+                                    <th>
+                                        Units Sold
+                                    </th>
+
+                                    <th>
+                                        Demand
+                                    </th>
+
+                                    <th>
+                                        Price
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="inventoryTableBody">
+
+                                <tr>
+
+                                    <td colspan="7"
+                                        class="loading-cell">
+
+                                        Loading inventory...
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ANALYTICS
+                 ================================================= -->
+
+            <section id="analytics"
+                     class="page-section">
+
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ANALYTICS
+                        </span>
+
+                        <h1>
+                            Inventory Analytics
+                        </h1>
+
+                        <p>
+                            Analyze inventory distribution, product performance and demand trends.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analytics-grid">
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Category-wise Inventory
+                                </h3>
+
+                                <p>
+                                    Inventory units by category
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-container">
+
+                            <div id="categoryChart"
+                                 class="plotly-chart">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h3>
+                                    Product-wise Sales
+                                </h3>
+
+                                <p>
+                                    Top products by units sold
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-container">
+
+                            <div id="productChart"
+                                 class="plotly-chart">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel large-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Demand Trend
+                            </h3>
+
+                            <p>
+                                Monthly sales and demand analysis
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-container large">
+
+                        <div id="demandChartAnalytics"
+                             class="plotly-chart">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 RECOMMENDATIONS
+                 ================================================= -->
+
+            <section id="recommendations"
+                     class="page-section">
+
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            INTELLIGENCE
+                        </span>
+
+                        <h1>
+                            Inventory Recommendations
+                        </h1>
+
+                        <p>
+                            Smart actions based on current inventory conditions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recommendation-grid">
+
+
+                    <div class="recommendation-card danger-card">
+
+                        <div class="recommendation-icon">
+                            !
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Urgent Restock
+                            </span>
+
+                            <strong>
+                                {{OUT_OF_STOCK}}
+                            </strong>
+
+                            <p>
+                                Products currently out of stock.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="recommendation-card warning-card">
+
+                        <div class="recommendation-icon">
+                            !
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Restock Soon
+                            </span>
+
+                            <strong>
+                                {{LOW_STOCK}}
+                            </strong>
+
+                            <p>
+                                Products requiring replenishment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="recommendation-card neutral-card">
+
+                        <div class="recommendation-icon">
+                            ◇
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Overstock Monitor
+                            </span>
+
+                            <strong>
+                                {{OVERSTOCKED}}
+                            </strong>
+
+                            <p>
+                                Inventory records showing overstock conditions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Recommended Actions
+                            </h3>
+
+                            <p>
+                                Inventory management guidance
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="insight-list">
+
+
+                        <div class="insight-item">
+
+                            <span class="insight-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Prioritize out-of-stock products
+                                </strong>
+
+                                <p>
+                                    Review urgent restocking requirements before regular replenishment.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="insight-item">
+
+                            <span class="insight-number">
+                                02
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Monitor low-stock products
+                                </strong>
+
+                                <p>
+                                    Use reorder quantities to plan upcoming inventory replenishment.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="insight-item">
+
+                            <span class="insight-number">
+                                03
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Review overstocked inventory
+                                </strong>
+
+                                <p>
+                                    Monitor products with high stock coverage to reduce excess inventory.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="insight-item">
+
+                            <span class="insight-number">
+                                04
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Track fast-moving products
+                                </strong>
+
+                                <p>
+                                    Maintain adequate stock levels for products with higher sell-through rates.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FORECASTING
+                 ================================================= -->
+
+            <section id="forecasting"
+                     class="page-section">
+
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            FORECASTING
+                        </span>
+
+                        <h1>
+                            Demand Forecasting
+                        </h1>
+
+                        <p>
+                            Forecast future inventory demand using the evaluated forecasting model.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="forecast-cards">
+
+
+                    <div class="forecast-card">
+
+                        <span>
+                            Forecast Period
+                        </span>
+
+                        <strong>
+                            {{FORECAST_PERIOD}}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="forecast-card">
+
+                        <span>
+                            Forecast Demand
+                        </span>
+
+                        <strong>
+                            {{FORECAST_DEMAND}}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="forecast-card">
+
+                        <span>
+                            Forecast Method
+                        </span>
+
+                        <strong>
+                            {{FORECAST_METHOD}}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel large-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Historical Demand & Forecast
+                            </h3>
+
+                            <p>
+                                Historical demand compared with forecast demand.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-container large">
+
+                        <div id="demandChartForecasting"
+                             class="plotly-chart">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Forecasting Method
+                            </h3>
+
+                            <p>
+                                Model evaluation used for demand forecasting.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="method-info">
+
+                        <p>
+                            The project evaluated Linear Regression,
+                            Random Forest, ARIMA and Moving Average
+                            using MAE, RMSE and R².
+                        </p>
+
+                        <p>
+                            The final demand forecast uses the
+                            3-month Moving Average approach.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 REPORTS
+                 ================================================= -->
+
+            <section id="reports"
+                     class="page-section">
+
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            REPORTING
+                        </span>
+
+                        <h1>
+                            Reports
+                        </h1>
+
+                        <p>
+                            Generate and export inventory analysis reports.
+                        </p>
+
+                    </div>
+
+
+                    <button class="primary-button"
+                            onclick="generateReport()">
+
+                        Generate Report
+
+                    </button>
+
+                </div>
+
+
+                <div class="report-grid">
+
+
+                    <div class="report-card">
+
+                        <div class="report-icon">
+                            ▤
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Inventory Summary
+                            </h3>
+
+                            <p>
+                                Products, categories, stock levels and inventory valuation.
+                            </p>
+
+                        </div>
+
+                        <button onclick="generateReport()">
+                            Download Report →
+                        </button>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <div class="report-icon">
+                            ◈
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Product Analysis
+                            </h3>
+
+                            <p>
+                                Product sales, inventory and movement analysis.
+                            </p>
+
+                        </div>
+
+                        <button onclick="generateReport()">
+                            Download Report →
+                        </button>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <div class="report-icon">
+                            ⌁
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Forecast Report
+                            </h3>
+
+                            <p>
+                                Forecast demand and model evaluation information.
+                            </p>
+
+                        </div>
+
+                        <button onclick="generateReport()">
+                            Download Report →
+                        </button>
+
+                    </div>
+
+
+                    <div class="report-card">
+
+                        <div class="report-icon">
+                            !
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Stock Alerts
+                            </h3>
+
+                            <p>
+                                Low-stock, out-of-stock and replenishment recommendations.
+                            </p>
+
+                        </div>
+
+                        <button onclick="generateReport()">
+                            Download Report →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Report Contents
+                            </h3>
+
+                            <p>
+                                The generated Excel report contains multiple analysis sheets.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="report-contents">
+
+                        <span>Inventory Summary</span>
+
+                        <span>Category Analysis</span>
+
+                        <span>Product Analysis</span>
+
+                        <span>Stock Alerts</span>
+
+                        <span>Monthly Analysis</span>
+
+                        <span>Forecast</span>
+
+                        <span>Model Comparison</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   PAGE NAVIGATION
+   ========================================================= */
+
+function showPage(
+    pageId,
+    clickedButton
+) {
+
+    document
+        .querySelectorAll(".page-section")
+        .forEach(function(page) {
+
+            page.classList.remove(
+                "active-page"
+            );
+
+        });
+
+
+    const selectedPage =
+        document.getElementById(
+            pageId
+        );
+
+
+    if (selectedPage) {
+
+        selectedPage.classList.add(
+            "active-page"
+        );
+
+    }
+
+
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (clickedButton) {
+
+        clickedButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const pageNames = {
+
+        dashboard:
+            "Dashboard",
+
+        inventory:
+            "Inventory",
+
+        analytics:
+            "Analytics",
+
+        recommendations:
+            "Recommendations",
+
+        forecasting:
+            "Forecasting",
+
+        reports:
+            "Reports"
+
+    };
+
+
+    const breadcrumb =
+        document.getElementById(
+            "breadcrumb"
+        );
+
+
+    if (breadcrumb) {
+
+        breadcrumb.textContent =
+            pageNames[pageId] ||
+            "Dashboard";
+
+    }
+
+
+    setTimeout(function() {
+
+        window.dispatchEvent(
+            new Event("resize")
+        );
+
+    }, 100);
+
+}
+
+
+
+/* =========================================================
+   THEME
+   ========================================================= */
+
+function toggleTheme() {
+
+    document.body.classList.toggle(
+        "dark-theme"
+    );
+
+
+    const isDark =
+        document.body.classList.contains(
+            "dark-theme"
+        );
+
+
+    localStorage.setItem(
+        "stockwise-theme",
+        isDark
+            ? "dark"
+            : "light"
+    );
+
+}
+
+
+
+/* =========================================================
+   CHART CONFIG
+   ========================================================= */
+
+const chartConfig = {
+
+    responsive: true,
+
+    displayModeBar: false
+
+};
+
+
+
+function chartLayout(
+    yTitle
+) {
+
+    return {
+
+        autosize: true,
+
+        margin: {
+
+            l: 60,
+
+            r: 20,
+
+            t: 20,
+
+            b: 60
+
+        },
+
+        paper_bgcolor:
+            "rgba(0,0,0,0)",
+
+        plot_bgcolor:
+            "rgba(0,0,0,0)",
+
+        font: {
+
+            family:
+                "Inter, Arial, sans-serif"
+
+        },
+
+        xaxis: {
+
+            automargin: true
+
+        },
+
+        yaxis: {
+
+            title:
+                yTitle,
+
+            automargin: true
+
+        },
+
+        legend: {
+
+            orientation:
+                "h"
+
+        }
+
+    };
+
+}
+
+
+
+/* =========================================================
+   CATEGORY CHART
+   ========================================================= */
+
+function renderCategoryChart(
+    data
+) {
+
+    const element =
+        document.getElementById(
+            "categoryChart"
+        );
+
+
+    if (!element) return;
+
+
+    Plotly.newPlot(
+
+        element,
+
+        [{
+
+            x: data.map(
+                item =>
+                    item.category
+            ),
+
+            y: data.map(
+                item =>
+                    item.inventory
+            ),
+
+            type: "bar",
+
+            name: "Inventory",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Inventory: %{y:,.0f}" +
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...chartLayout(
+                "Inventory Units"
+            ),
+
+            showlegend: false
+
+        },
+
+        chartConfig
+
+    );
+
+}
+
+
+
+/* =========================================================
+   PRODUCT CHART
+   ========================================================= */
+
+function renderProductChart(
+    data
+) {
+
+    const element =
+        document.getElementById(
+            "productChart"
+        );
+
+
+    if (!element) return;
+
+
+    const topProducts =
+        data.slice(
+            0,
+            10
+        );
+
+
+    Plotly.newPlot(
+
+        element,
+
+        [{
+
+            x: topProducts.map(
+                item =>
+                    item.product
+            ),
+
+            y: topProducts.map(
+                item =>
+                    item.sales
+            ),
+
+            type: "bar",
+
+            name: "Sales",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Units Sold: %{y:,.0f}" +
+                "<extra></extra>"
+
+        }],
+
+        {
+
+            ...chartLayout(
+                "Units Sold"
+            ),
+
+            showlegend: false
+
+        },
+
+        chartConfig
+
+    );
+
+}
+
+
+
+/* =========================================================
+   DEMAND CHARTS
+   ========================================================= */
+
+function renderDemandCharts(
+    data
+) {
+
+    const months =
+        data.map(
+            item =>
+                item.month
+        );
+
+
+    const demand =
+        data.map(
+            item =>
+                item.demand
+        );
+
+
+    const sales =
+        data.map(
+            item =>
+                item.sales
+        );
+
+
+    const traces = [
+
+        {
+
+            x: months,
+
+            y: demand,
+
+            type: "scatter",
+
+            mode:
+                "lines+markers",
+
+            name:
+                "Demand",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Demand: %{y:,.0f}" +
+                "<extra></extra>"
+
+        },
+
+
+        {
+
+            x: months,
+
+            y: sales,
+
+            type: "scatter",
+
+            mode:
+                "lines+markers",
+
+            name:
+                "Sales",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Sales: %{y:,.0f}" +
+                "<extra></extra>"
+
+        }
+
+    ];
+
+
+    const dashboard =
+        document.getElementById(
+            "demandChartDashboard"
+        );
+
+
+    if (dashboard) {
+
+        Plotly.newPlot(
+
+            dashboard,
+
+            traces,
+
+            chartLayout(
+                "Units"
+            ),
+
+            chartConfig
+
+        );
+
+    }
+
+
+    const analytics =
+        document.getElementById(
+            "demandChartAnalytics"
+        );
+
+
+    if (analytics) {
+
+        Plotly.newPlot(
+
+            analytics,
+
+            traces,
+
+            chartLayout(
+                "Units"
+            ),
+
+            chartConfig
+
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   FORECAST CHART
+   ========================================================= */
+
+function renderForecastChart(
+    monthly,
+    forecast
+) {
+
+    const element =
+        document.getElementById(
+            "demandChartForecasting"
+        );
+
+
+    if (!element) return;
+
+
+    const traces = [
+
+        {
+
+            x: monthly.map(
+                item =>
+                    item.month
+            ),
+
+            y: monthly.map(
+                item =>
+                    item.demand
+            ),
+
+            type: "scatter",
+
+            mode:
+                "lines+markers",
+
+            name:
+                "Historical Demand",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Demand: %{y:,.0f}" +
+                "<extra></extra>"
+
+        }
+
+    ];
+
+
+    if (
+
+        forecast &&
+        forecast.data &&
+        forecast.data.length > 0
+
+    ) {
+
+        traces.push({
+
+            x: forecast.data.map(
+                item =>
+                    item.period
+            ),
+
+            y: forecast.data.map(
+                item =>
+                    item.demand
+            ),
+
+            type: "scatter",
+
+            mode:
+                "lines+markers",
+
+            name:
+                "Forecast",
+
+            hovertemplate:
+                "<b>%{x}</b><br>" +
+                "Forecast: %{y:,.0f}" +
+                "<extra></extra>"
+
+        });
+
+    }
+
+
+    Plotly.newPlot(
+
+        element,
+
+        traces,
+
+        chartLayout(
+            "Demand"
+        ),
+
+        chartConfig
+
+    );
+
+}
+
+
+
+/* =========================================================
+   LOAD DASHBOARD
+   ========================================================= */
+
+async function loadDashboard() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/dashboard"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Dashboard API failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.error ||
+                "Dashboard API error"
+            );
+
+        }
+
+
+        renderCategoryChart(
+            data.category
+        );
+
+
+        renderProductChart(
+            data.products
+        );
+
+
+        renderDemandCharts(
+            data.monthly
+        );
+
+
+        renderForecastChart(
+
+            data.monthly,
+
+            data.forecast
+
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   EXPORT CSV
+   ========================================================= */
+
+async function exportData() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/export-data"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Export failed"
+            );
+
+        }
+
+
+        const blob =
+            await response.blob();
+
+
+        const url =
+            window.URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href = url;
+
+
+        link.download =
+            "stockwise_inventory_data.csv";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        window.URL.revokeObjectURL(
+            url
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Unable to export inventory data."
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   GENERATE REPORT
+   ========================================================= */
+
+async function generateReport() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/generate-report"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Report generation failed"
+            );
+
+        }
+
+
+        const blob =
+            await response.blob();
+
+
+        const url =
+            window.URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href = url;
+
+
+        link.download =
+            "stockwise_inventory_report.xlsx";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        window.URL.revokeObjectURL(
+            url
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Unable to generate the report."
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   INVENTORY TABLE
+   ========================================================= */
+
+let inventoryRows = [];
+
+
+async function loadInventoryTable() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/data"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.error
+            );
+
+        }
+
+
+        inventoryRows =
+            data.rows;
+
+
+        renderInventoryTable(
+            inventoryRows
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+
+
+function renderInventoryTable(
+    rows
+) {
+
+    const body =
+        document.getElementById(
+            "inventoryTableBody"
+        );
+
+
+    if (!body) return;
+
+
+    if (!rows.length) {
+
+        body.innerHTML = `
+
+            <tr>
+
+                <td colspan="7"
+                    class="loading-cell">
+
+                    No inventory records found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    body.innerHTML =
+        rows.slice(
+            0,
+            100
+        ).map(
+            row => `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${row["Product ID"]}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${row["Category"]}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            row["Inventory Level"] || 0
+                        ).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            row["Units Sold"] || 0
+                        ).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            row["Demand"] || 0
+                        ).toLocaleString()}
+                    </td>
+
+                    <td>
+                        ₹${Number(
+                            row["Price"] || 0
+                        ).toLocaleString()}
+                    </td>
+
+                    <td>
+
+                        <span class="status-badge ${getStatusClass(
+                            row["Stock Status"]
+                        )}">
+
+                            ${row["Stock Status"]}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+
+function getStatusClass(
+    status
+) {
+
+    if (
+        status === "Out of Stock"
+    ) {
+
+        return "status-danger";
+
+    }
+
+
+    if (
+        status === "Low Stock"
+    ) {
+
+        return "status-warning";
+
+    }
+
+
+    return "status-healthy";
+
+}
+
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+function filterInventory() {
+
+    const search =
+        (
+            document.getElementById(
+                "inventorySearch"
+            )?.value || ""
+        ).toLowerCase();
+
+
+    const category =
+        document.getElementById(
+            "categoryFilter"
+        )?.value || "";
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        )?.value || "";
+
+
+    const filtered =
+        inventoryRows.filter(
+            row => {
+
+                const product =
+                    String(
+                        row["Product ID"] ||
+                        ""
+                    ).toLowerCase();
+
+
+                const rowCategory =
+                    String(
+                        row["Category"] ||
+                        ""
+                    );
+
+
+                const rowStatus =
+                    String(
+                        row["Stock Status"] ||
+                        ""
+                    );
+
+
+                return (
+
+                    product.includes(
+                        search
+                    ) &&
+
+                    (
+                        !category ||
+                        rowCategory ===
+                        category
+                    ) &&
+
+                    (
+                        !status ||
+                        rowStatus ===
+                        status
+                    )
+
+                );
+
+            }
+        );
+
+
+    renderInventoryTable(
+        filtered
+    );
+
+}
+
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+
+        const savedTheme =
+            localStorage.getItem(
+                "stockwise-theme"
+            );
+
+
+        if (
+            savedTheme === "dark"
+        ) {
+
+            document.body.classList.add(
+                "dark-theme"
+            );
+
+        }
+
+
+        loadDashboard();
+
+
+        loadInventoryTable();
+
+
+        document
+            .getElementById(
+                "inventorySearch"
+            )
+            ?.addEventListener(
+                "input",
+                filterInventory
+            );
+
+
+        document
+            .getElementById(
+                "categoryFilter"
+            )
+            ?.addEventListener(
+                "change",
+                filterInventory
+            );
+
+
+        document
+            .getElementById(
+                "statusFilter"
+            )
+            ?.addEventListener(
+                "change",
+                filterInventory
+            );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
