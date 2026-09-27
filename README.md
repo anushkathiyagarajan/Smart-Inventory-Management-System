@@ -1,4 +1,4 @@
-Yep bro. For your **StockWise – Smart Inventory Management System**, use these two files.
+
 
 ## 1. `requirements.txt`
 
